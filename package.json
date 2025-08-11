@@ -1,0 +1,23 @@
+{
+  "name": "playwright-typescript-e2e-automation",
+  "version": "1.0.0",
+  "description": "playwright-typescript-E2E-Automation",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vikramjangid/playwright-typescript-E2E-Automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vikramjangid/playwright-typescript-E2E-Automation/issues"
+  },
+  "homepage": "https://github.com/Vikramjangid/playwright-typescript-E2E-Automation#readme",
+  "devDependencies": {
+    "@otpdock/client": "^0.1.1-beta.13",
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^24.2.1"
+  }
+}
