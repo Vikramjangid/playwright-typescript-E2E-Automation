@@ -13,7 +13,7 @@ export class OtpLoginPage extends BasePage {
   }
 
   async fillEmail(email: string) {
-    const emailLocator = this.page.getByRole('textbox', { name: 'Your Email Address' })
+    const emailLocator = this.page.getByRole('textbox', { name: 'Your Email Address' });
     await this.fill(emailLocator, email);
   }
 
