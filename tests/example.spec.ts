@@ -1,7 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { OtpDockClient } from '@otpdock/client';
 import { OtpLoginPage } from '../pages/OtpLoginPage';
-import { Logger } from '../utils/logger';
 
 const apiKey = process.env.OTPDOCK_API_KEY;
 if (!apiKey) {
@@ -32,10 +31,10 @@ test('Incorrect OTP login', async ({ page }) => {
   const otpLoginPage = new OtpLoginPage(page);
   await otpLoginPage.goto('https://practice.expandtesting.com/otp-login');
   await otpLoginPage.waitForOtpLoginPageToBeVisible();
-  await otpLoginPage.fillEmail("inbox.email@email.com");
+  await otpLoginPage.fillEmail('inbox.email@email.com');
   
   const otpVerificationPage = await otpLoginPage.clickSendOtpCode();
-  await otpVerificationPage.fillOtp("123456");
+  await otpVerificationPage.fillOtp('123456');
   await otpVerificationPage.clickVerifyOtp();
 
   await otpVerificationPage.assertVisible(page.locator('//p[text()="The provided OTP code is incorrect. Please check your code and try again."]'), 'User shall see incorrect OTP message');
