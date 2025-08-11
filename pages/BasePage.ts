@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import { Logger } from '../utils/logger';
 
 export class BasePage {
@@ -46,6 +46,27 @@ export class BasePage {
       await this.page.waitForSelector(locator, { state: 'visible' });
     } else {
       await locator.waitFor({ state: 'visible' });
+    }
+  }
+
+  async assertVisible(locator: string | Locator, message: string): Promise<void> {
+    Logger.step(`Asserting visibility of element: ${locator}`);
+    try {
+      if (typeof locator === 'string') {
+        // Wait for selector to exist up to 10 seconds
+        await this.page.waitForSelector(locator, { timeout: 10000 });
+        const isVisible = await this.page.isVisible(locator);
+        expect(isVisible).toBe(true);
+      } else {
+        // Wait for locator to exist up to 10 seconds
+        await locator.waitFor({ state: 'visible', timeout: 10000 });
+        const isVisible = await locator.isVisible();
+        expect(isVisible).toBe(true);
+      }
+      Logger.pass(message);
+    } catch (e) {
+      await Logger.fail(`${message} | Expected: visible, Got: hidden`, this.page);
+      throw e;
     }
   }
 }
